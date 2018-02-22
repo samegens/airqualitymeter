@@ -20,6 +20,15 @@ Air quality meter using of-the-shelf components to measure dust particles, CO2, 
 
 ![Fritzing](https://github.com/samegens/airqualitymeter/raw/master/Fritzing/fritzing.png "Fritzing")
 
+# Software
+
+1. Open AirQualityMeter.sln in Visual Studio.
+2. Adjust the brightness of the digits to your liking (search for `setBacklight` in AirQualityMeter.ino).
+3. If you're using different pins than indicated in the schematic, change the the pin definitions in AirQualityMeter.ino.
+4. Select 'Wemos D1 mini Lite' in the board drop-down.
+5. Select the correct COM port.
+6. Build and upload. You might need to remove the D1 from the breadboard when uploading, I sometimes got a sync error with the D1 on the breadboard and everything connected.
+
 # End result
 
 ![front](https://github.com/samegens/airqualitymeter/raw/master/images/front.jpg "Front")
