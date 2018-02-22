@@ -22,4 +22,8 @@ Air quality meter using of-the-shelf components to measure dust particles, CO2, 
 
 # End result
 
-TODO
+![front](https://github.com/samegens/airqualitymeter/raw/master/images/front.jpg "Front")
+
+![side](https://github.com/samegens/airqualitymeter/raw/master/images/side.jpg "Side")
+
+![inside](https://github.com/samegens/airqualitymeter/raw/master/images/inside.jpg "Inside")
