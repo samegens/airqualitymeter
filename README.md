@@ -15,6 +15,7 @@ Air quality meter using of-the-shelf components to measure dust particles, CO2, 
 - wires, [male to male](https://www.tinytronics.nl/shop/nl/kabels/prototype-draden/dupont-jumper-draad-male-male-10cm-10-draden) and [male to female](https://www.tinytronics.nl/shop/nl/kabels/prototype-draden/dupont-jumper-draad-male-female-10cm-10-draden)
 - enclosure, I used a cardboard box of 8cm x 21cm x 15cm
 - power bank, with a USB cable that ends in a micro-USB connector
+- stuff to attach the MQ-135 and displays to the enclosure. I used some electric wire (see photos).
 
 # Schematic
 
