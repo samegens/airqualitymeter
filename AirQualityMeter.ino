@@ -27,17 +27,22 @@ SevenSegmentTM1637 tm1637_mq135(CLK_3, DIO_3);
 #define PIN_MQ135 A0
 MQ135 mq135_sensor = MQ135(PIN_MQ135);
 
+// Comment this define when you found a stable Rzero.
+#define MQ135_CALIBRATION
+#ifdef MQ135_CALIBRATION
+int mq135Iteration = 0;
+#endif
 
 void setup()
 {
 	Serial.begin(115200);
 	mySDS.begin(PIN_RX, PIN_TX);
 	tm1637_p25.begin();
-	tm1637_p25.setBacklight(20);
+	tm1637_p25.setBacklight(40);
 	tm1637_p10.begin();
-	tm1637_p10.setBacklight(20);
+	tm1637_p10.setBacklight(40);
 	tm1637_mq135.begin();
-	tm1637_mq135.setBacklight(20);
+	tm1637_mq135.setBacklight(40);
 
 	tm1637_p25.printRaw(tm1637_p25.encode((char)('0')), 0);
 	tm1637_p25.printRaw(tm1637_p25.encode((char)('1')), 1);
@@ -81,34 +86,26 @@ void readMq135()
 	Serial.print("\t PPM: ");
 	Serial.println(ppm);
 
-	int ppm_for_display = (int)ppm;
-	if (ppm_for_display < 0)
-		ppm_for_display = 0;
-	if (ppm_for_display > 9999)
-		ppm_for_display = 9999;
+	int value_for_display = (int)ppm;
+#ifdef MQ135_CALIBRATION
+	// Switch between ppm and rzero (needed for calibration).
+	if ((mq135Iteration / 3) % 2 == 1)
+		value_for_display = (int)(rzero * 10);
+#endif
+
+	if (value_for_display < 0)
+		value_for_display = 0;
+	if (value_for_display > 9999)
+		value_for_display = 9999;
 
 	char digits[5] = { '\0' };
-	digits[0] = ppm_for_display / 1000;
-	if (digits[0] == 0)
-		digits[0] = ' ';
-	else
-		digits[0] += '0';
-
-	digits[1] = (ppm_for_display % 1000) / 100;
-	if (digits[0] == 0 && digits[1] == 0)
-		digits[1] = ' ';
-	else
-		digits[1] += '0';
-
-	digits[2] = (ppm_for_display % 100) / 10;
-	if (digits[0] == 0 && digits[1] == 0 && digits[2] == 0)
-		digits[2] = ' ';
-	else
-		digits[2] += '0';
-
-	digits[3] = ppm_for_display % 10 + '0';
+	digits[0] = '0' + value_for_display / 1000;
+	digits[1] = '0' + (value_for_display % 1000) / 100;
+	digits[2] = '0' + (value_for_display % 100) / 10;
+	digits[3] = '0' + value_for_display % 10;
 
 	tm1637_mq135.print(digits);
+	mq135Iteration++;
 }
 
 
@@ -116,34 +113,17 @@ void updateDisplay(SevenSegmentTM1637& display, float value)
 {
 	int intValue = (int)(value * 10);
 	char ch;
-	if (intValue >= 1000)
-	{
-		ch = '0' + intValue / 1000;
-	}
-	else
-	{
-		ch = ' ';
-	}
+	ch = '0' + intValue / 1000;
 	display.printRaw(display.encode(ch), 0);
 
-	intValue = intValue % 1000;
-	if (intValue >= 100)
-	{
-		ch = '0' + intValue / 100;
-	}
-	else
-	{
-		ch = ' ';
-	}
+	ch = '0' + (intValue % 1000) / 100;
 	display.printRaw(display.encode(ch), 1);
 
-	intValue = intValue % 100;
-	ch = '0' + intValue / 10;
+	ch = '0' + (intValue % 100) / 10;
 	// Enable decimal dot on third digit to function as decimal separator. Highest bit turns this decimal dot on.
 	display.printRaw(display.encode(ch) | B10000000, 2);
 
-	intValue = intValue % 10;
-	ch = '0' + intValue;
+	ch = '0' + intValue % 10;
 	display.printRaw(display.encode(ch), 3);
 }
 
