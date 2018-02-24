@@ -29,12 +29,17 @@ Air quality meter using of-the-shelf components to measure dust particles, CO2, 
 4. Select 'Wemos D1 mini Lite' in the board drop-down.
 5. Select the correct COM port.
 6. Build and upload. You might need to remove the D1 from the breadboard when uploading, I sometimes got a sync error with the D1 on the breadboard and everything connected.
+7. Let the meter burn in for at least 24 hours. During that time the top display will alternate between the measured gas concentration en between the current Rzero\*10.
+8. When the Rzero\*10 has stabilized after burn-in, open MQ135.h in Visual Studio and on line 27 change the value of RZERO to the displayed value / 10.
+9. Open AirQualityMeter.ino and comment out the MQ135_CALIBRATION define.
+10. Build and upload. 
+11. Each time you turn on the meter, the MQ135 needs to heat up, this may take a while (20 minutes or more).
 
 # End result
 
 ![front](https://github.com/samegens/airqualitymeter/raw/master/images/front.jpg "Front")
 
-The top display shows the ppm of NH3,NOx, alcohol, Benzene, smoke and CO2. The left display shows µg/m³ of [PM2.5](https://en.wikipedia.org/wiki/Particulates), the right one shows µg/m³ of [PM10](https://en.wikipedia.org/wiki/Particulates).
+The top display shows the [ppm](https://en.wikipedia.org/wiki/Parts-per_notation) of NH3, NOx, alcohol, Benzene, smoke and CO2. The left display shows µg/m³ of [PM2.5](https://en.wikipedia.org/wiki/Particulates), the right one shows µg/m³ of [PM10](https://en.wikipedia.org/wiki/Particulates).
 
 ![side](https://github.com/samegens/airqualitymeter/raw/master/images/side.jpg "Side")
 
