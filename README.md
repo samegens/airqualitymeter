@@ -39,7 +39,7 @@ Air quality meter using of-the-shelf components to measure dust particles, CO2, 
 
 ![front](https://github.com/samegens/airqualitymeter/raw/master/images/front.jpg "Front")
 
-The top display shows the ppm of NH3, NOx, alcohol, Benzene, smoke and CO2. The left display shows µg/m³ of [PM2.5](https://en.wikipedia.org/wiki/Particulates), the right one shows µg/m³ of [PM10](https://en.wikipedia.org/wiki/Particulates).
+The top display shows the [ppm](https://en.wikipedia.org/wiki/Parts-per_notation) of NH3, NOx, alcohol, Benzene, smoke and CO2. The left display shows µg/m³ of [PM2.5](https://en.wikipedia.org/wiki/Particulates), the right one shows µg/m³ of [PM10](https://en.wikipedia.org/wiki/Particulates).
 
 ![side](https://github.com/samegens/airqualitymeter/raw/master/images/side.jpg "Side")
 
