@@ -1,5 +1,5 @@
 /*
- Name:		Fijnstofmeter.ino
+ Name:		AirQualityMeter.ino
  Created:	2/18/2018 11:26:28 AM
  Author:	Sebastiaan
 */
@@ -28,7 +28,7 @@ SevenSegmentTM1637 tm1637_mq135(CLK_3, DIO_3);
 MQ135 mq135_sensor = MQ135(PIN_MQ135);
 
 // Comment this define when you found a stable Rzero.
-#define MQ135_CALIBRATION
+//#define MQ135_CALIBRATION
 #ifdef MQ135_CALIBRATION
 int mq135Iteration = 0;
 #endif
@@ -91,6 +91,7 @@ void readMq135()
 	// Switch between ppm and rzero (needed for calibration).
 	if ((mq135Iteration / 3) % 2 == 1)
 		value_for_display = (int)(rzero * 10);
+	mq135Iteration++;
 #endif
 
 	if (value_for_display < 0)
@@ -105,7 +106,6 @@ void readMq135()
 	digits[3] = '0' + value_for_display % 10;
 
 	tm1637_mq135.print(digits);
-	mq135Iteration++;
 }
 
 

@@ -34,6 +34,7 @@ Air quality meter using of-the-shelf components to measure dust particles, CO2, 
 9. Open AirQualityMeter.ino and comment out the MQ135_CALIBRATION define.
 10. Build and upload. 
 11. Each time you turn on the meter, the MQ135 needs to heat up, this may take a while (20 minutes or more).
+12. You need to calibrate the MQ135, see [this article](https://www.codrey.com/electronic-circuits/how-to-use-mq-135-gas-sensor/).
 
 # End result
 
